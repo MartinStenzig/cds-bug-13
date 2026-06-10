@@ -1,0 +1,13 @@
+@server=http://localhost:4004
+@service=/odata/v4/admin
+
+### Check SAP connection by reading a maintenance order
+GET {{server}}{{service}}/S4MaintenanceOrder?$top=1
+
+
+### Try to post to the action, which should be handled by the handler 
+POST {{server}}{{service}}/S4OpPhaseControl(MaintenanceOrder='4002903',MaintenanceOrderOperation='0020',MaintenanceOrderSubOperation='',MaintenancePhaseControl='NOSC')/ActvtMaintOrderOpPhaseControl
+Content-Type: application/json
+
+{
+}
