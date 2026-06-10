@@ -27,7 +27,8 @@ The problem is the following:
 
 ## To reproduce
 1. Clone the repo
-2. Create `.cdsrc-private.json` and replace the values in []
+2. run `npm i`
+3. Create `.cdsrc-private.json` and replace the values in []
 ### Content of '.cdsrc-private.json'
 ```json
 {
@@ -50,3 +51,16 @@ The problem is the following:
     }
 }
 ```
+# Versions used
+| Package            | Version | Location                                  |
+ | ------------------ | ------- | ----------------------------------------- |
+ | @sap/cds           | 9.9.1   | ./node_modules/@sap/cds                   |
+ | @sap/cds-compiler  | 6.9.2   | ./node_modules/@sap/cds-compiler          |
+ | @sap/cds-fiori     | 2.3.0   | ./node_modules/@sap/cds-fiori             |
+ | @cap-js/db-service | 2.11.0  | ./node_modules/@cap-js/db-service         |
+ | @cap-js/sqlite     | 2.4.0   | ./node_modules/@cap-js/sqlite             |
+ | cds.home           |         | ./node_modules/@sap/cds                   |
+ | cds.root           |         | ~/dev/MartinStenzig/cds-bug-13            |
+ | npm root -l        |         | ./node_modules                            |
+ | npm root -g        |         | /opt/homebrew/lib/node_modules            |
+ | Node.js            | 26.0.0  | /opt/homebrew/Cellar/node/26.0.0/bin/node |
