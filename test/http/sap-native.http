@@ -1,0 +1,26 @@
+@sapMaintenanceService={{$dotenv S4_HOST}}/sap/opu/odata/sap/API_MAINTENANCEORDER
+@s4User={{$dotenv S4_USER}}
+@s4Password={{$dotenv S4_PASSWORD}}
+
+### Check service availability and CSRF token retrieval
+# @name CsrfTokenFetch
+GET {{sapMaintenanceService}}?$format=json
+Authorization: Basic {{s4User}}:{{s4Password}}
+x-csrf-token: fetch
+
+
+### Not working --- Perform the intended call
+POST {{sapMaintenanceService}}/MaintOrderOpPhaseControl(MaintenanceOrder='4002903',MaintenanceOrderOperation='0010',MaintenanceOrderSubOperation='',MaintenancePhaseControl='NOSC')/ActvtMaintOrderOpPhaseControl
+Authorization: Basic {{s4User}}:{{s4Password}}
+x-csrf-token: {{CsrfTokenFetch.response.headers.x-csrf-token}}
+
+### Working --- Activate the status
+POST {{sapMaintenanceService}}/ActvtMaintOrderOpPhaseControl?MaintenanceOrder='4002903'&MaintenanceOrderOperation='0010'&MaintenanceOrderSubOperation=''&MaintenancePhaseControl='NOSC'&$format=json
+Authorization: Basic {{s4User}}:{{s4Password}}
+x-csrf-token: {{CsrfTokenFetch.response.headers.x-csrf-token}}
+
+### Working --- Deactivate the status again
+POST {{sapMaintenanceService}}/DactvtMaintOrderOpPhaseControl?MaintenanceOrder='4002903'&MaintenanceOrderOperation='0010'&MaintenanceOrderSubOperation=''&MaintenancePhaseControl='NOSC'&$format=json
+Authorization: Basic {{s4User}}:{{s4Password}}
+x-csrf-token: {{CsrfTokenFetch.response.headers.x-csrf-token}}
+

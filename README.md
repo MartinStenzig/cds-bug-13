@@ -7,7 +7,7 @@ The problem is the following:
 1. I implemented the handler (in admin.js) as outlined in the documentation (https://cap.cloud.sap/docs/guides/services/custom-actions#calling-actions-functions on 2026-06-10)
 2. When I call the action for a combination of order, operation and phase control code like this: 
     ```http
-    POST {{server}}{{service}}/S4OpPhaseControl(MaintenanceOrder='4002903',MaintenanceOrderOperation='0020',MaintenanceOrderSubOperation='',MaintenancePhaseControl='NOSC')/ActvtMaintOrderOpPhaseControl
+    POST {{server}}{{service}}/S4OpPhaseControl(MaintenanceOrder='4002903',MaintenanceOrderOperation='0010',MaintenanceOrderSubOperation='',MaintenancePhaseControl='NOSC')/ActvtMaintOrderOpPhaseControl
     Content-Type: application/json
 
     {}
@@ -18,12 +18,16 @@ The problem is the following:
     {
         "request": {
         "method": "POST",
-        "url": "/sap/opu/odata/sap/API_MAINTENANCEORDER/ActvtMaintOrderOpPhaseControl?MaintenanceOrder='4002903'&MaintenanceOrderOperation='0020'&MaintenanceOrderSubOperation=''&MaintenancePhaseControl='NOSC'",
+        "url": "/sap/opu/odata/sap/API_MAINTENANCEORDER/ActvtMaintOrderOpPhaseControl?MaintenanceOrder='4002903'&MaintenanceOrderOperation='0010'&MaintenanceOrderSubOperation=''&MaintenancePhaseControl='NOSC'",
         "headers": [Object]
         }
     }
     ```
-4. The url called in S/4 should look like the following instead: `/sap/opu/odata/sap/API_MAINTENANCEORDER/MaintOrderOpPhaseControl(MaintenanceOrder='4002903',MaintenanceOrderOperation='0020',MaintenanceOrderSubOperation='',MaintenancePhaseControl='NOSC')/ActvtMaintOrderOpPhaseControl`
+4. The URL seems to be correct (see [sap-native.http](./test/http/sap-native.http)), but there is still a `CSRF token validation failed` error coming back when I run my CAP based request that I cannot reproduce in my .http example.
+
+5. To make sure this problem is not just tracing back to the new native fetch functionality, I installed `@sap-cloud-sdk/http-client` and changed native_fetch to false in my .cdsrc-private.json. 
+
+
 
 ## To reproduce
 1. Clone the repo
@@ -50,6 +54,12 @@ The problem is the following:
         }
     }
 }
+```
+4. Create `.env` and replace the values in []
+```env
+S4_HOST=[S4server]
+S4_USER=[S4user]
+S4_PASSWORD=[S4password]
 ```
 # Versions used
 | Package            | Version | Location                                  |

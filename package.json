@@ -2,6 +2,7 @@
   "name": "cds-bug-13",
   "version": "1.0.0",
   "dependencies": {
+    "@sap-cloud-sdk/http-client": "^4.7.0",
     "@sap/cds": "^9"
   },
   "devDependencies": {
@@ -12,11 +13,11 @@
   },
   "private": true,
   "type": "module",
-   "cds": {
+  "cds": {
     "log": {
       "levels": {
         "admin": "debug",
-        "remote": "debug"
+        "remote": "info"
       }
     },
     "requires": {
