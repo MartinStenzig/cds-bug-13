@@ -74,3 +74,8 @@ S4_PASSWORD=[S4password]
  | npm root -l        |         | ./node_modules                            |
  | npm root -g        |         | /opt/homebrew/lib/node_modules            |
  | Node.js            | 26.0.0  | /opt/homebrew/Cellar/node/26.0.0/bin/node |
+
+ # Solution
+ The problem was acknowledged to be cookie handling. The solution is going to be rolled out with CAP V10.0.1. 
+
+ Thanks to the SAP CAP team for the speedy validation!
